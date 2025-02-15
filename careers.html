@@ -1,0 +1,2346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>CareerBuddy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=" " />
+    <meta name="keywords" content="" />
+    <meta content="Themesdesign" name="author" />
+    <link rel="shortcut icon" href="images/logo.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+       
+        button {
+            padding: 15px 25px;
+            margin: 10px;
+            background-color: white;
+            color: #1c2f50;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: transform 0.3s, background-color 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        button:hover, button.active {
+            background-color: #007BFF;
+            color: white;
+            transform: scale(1.1);
+        }
+        .career-container {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            border: 2px solid #007BFF;
+            border-style: none;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .career-details {
+            display: none;
+            margin-top: 10px;
+            padding: 15px;
+            border: 1px solid #1c2f50;
+            border-radius: 8px;
+            border-style: none;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .career-container button {
+            margin: 5px;
+        }
+        .navbar{
+            padding: 20px 15px;
+        }
+    </style>
+    <script>
+        function showOptions(option) {
+            const buttons = document.querySelectorAll('.home button');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+                button.style.backgroundColor = "white";
+                button.style.color = "#1c2f50";
+            });
+
+            const selectedButton = document.querySelector(`button[onclick="showOptions('${option}')"]`);
+            if (selectedButton) {
+                selectedButton.classList.add('active');
+                selectedButton.style.backgroundColor = "#007BFF";
+                selectedButton.style.color = "white";
+            }
+
+            const containers = document.querySelectorAll('.career-container');
+            containers.forEach(container => container.style.display = 'none');
+
+            const selectedContainer = document.getElementById(option + '-container');
+            if (selectedContainer) {
+                selectedContainer.style.display = 'block';
+            }
+        }
+
+        function showDetails(detailId, parentId) {
+            const buttons = document.querySelectorAll(`#${parentId} button`);
+            buttons.forEach(button => {
+                button.classList.remove('active');
+                button.style.backgroundColor = "white";
+                button.style.color = "#1c2f50";
+            });
+
+            const selectedButton = document.querySelector(`#${parentId} button[onclick="showDetails('${detailId}', '${parentId}')"]`);
+            if (selectedButton) {
+                selectedButton.classList.add('active');
+                selectedButton.style.backgroundColor = "#007BFF";
+                selectedButton.style.color = "white";
+            }
+
+            const details = document.querySelectorAll(`#${parentId} .career-details`);
+            details.forEach(detail => detail.style.display = 'none');
+
+            const selectedDetail = document.getElementById(detailId);
+            if (selectedDetail) {
+                selectedDetail.style.display = 'block';
+            }
+        }
+    </script>
+
+</head>
+
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="71">
+
+   
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold text-primary" href="#">Career<span style="color:red">Buddy</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown">
+                        Services
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Career Counselling</a></li>
+                        <li><a class="dropdown-item" href="#">Psychological Counselling</a></li>
+                        <li><a class="dropdown-item" href="#">Personality Development</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#">Testimonials</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-bs-toggle="dropdown">
+                    Resources
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Career Counselling</a></li>
+                        <li><a class="dropdown-item" href="#">Psychological Counselling</a></li>
+                        <li><a class="dropdown-item" href="#">Personality Development</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Contact Us</a></li>
+                
+                <li class="nav-item">
+                    <a class="btn ms-2" href="#" style="background-color: #4382EC;color: white">Log In / Sign Up</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+    
+    
+    <section class="home" id="home" style="background-image: url(images/bg-home.png);padding-top: 50px;padding-bottom: 80px;">
+        <div class="container position-relative">
+            <div style="text-align: center;">
+                <div class="language-switcher" style="position: relative; display: flex; justify-content: flex-end; align-items: center; font-family: Arial, sans-serif;">
+                    <script type="text/javascript">
+                        function googleTranslateElementInit() {
+                            new google.translate.TranslateElement({
+                                pageLanguage: 'en',
+                                includedLanguages: 'en,mr', // Include English and Marathi
+                                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                            }, 'google_translate_element');
+                        }
+                    </script>
+                    
+                    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+                    <div id="google_translate_element" style="display: flex; justify-content: center; align-items: center;"></div>
+                </div>
+                
+                <h1 style="color: #1c2f50; font-size: 45px; text-shadow: 4px 5px 0px rgba(123, 169, 221, 0.3);font-family:cooper">
+                    Here are your Career Opportunities
+                </h1>
+                <h3 style="color: #007BFF; font-size: 22px;">What You Have Just Completed?</h3>
+                <button onclick="showOptions('ssc')">SSC(10<sup>th</sup>)</button>
+                <button onclick="showOptions('hsc')">HSC(12<sup>th</sup>)</button>
+                <button onclick="showOptions('graduation')">Graduation</button>
+            </div>
+
+            <!-- Career container for SSC -->
+            <div id="ssc-container" class="career-container"style="text-align: center;">
+                <h3>Career Options After SSC</h3>
+                <button onclick="showDetails('ssc-arts', 'ssc-container')">Arts</button>
+                <button onclick="showDetails('ssc-commerce', 'ssc-container')">Commerce</button>
+                <button onclick="showDetails('ssc-science', 'ssc-container')">Science</button>
+                <button onclick="showDetails('ssc-diploma', 'ssc-container')">Diploma</button>
+                <button onclick="showDetails('ssc-other', 'ssc-container')">Other</button>
+
+                <div id="ssc-arts" class="career-details">
+                    <h4>Arts</h4>
+                    <p>
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">Arts Stream Overview</h1>
+                        </header>
+    
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    The Arts Stream offers a rich and diverse curriculum that encompasses a wide range of
+                                    subjects, focusing on humanities, social sciences, and creative arts. It is ideal for
+                                    students with an interest in literature, history, sociology, psychology, languages, and
+                                    the arts. The stream fosters creativity, critical thinking, and communication skills.
+                                </p>
+                            </section>
+    
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. Subjects in Arts Stream</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    The Arts Stream provides a wide array of subjects, offering students the flexibility to
+                                    pursue areas of interest. The subjects are categorized as follows:
+                                </p>
+    
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) Core Subjects:</h6>
+                                    <div style="padding-left: 5%;">
+                                        <ol style="list-style-type: lower-roman; padding-left: 0;">
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">English:</span> A compulsory language
+                                                subject focusing on communication, writing skills, and critical analysis of
+                                                literature.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">History:</span> Study of past events,
+                                                civilizations, and their impact on the present and future.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Political Science:</span> Study of
+                                                political systems, government structures, and global political dynamics.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Sociology:</span> Study of society, social
+                                                behavior, and societal structures.
+                                            </li>
+                                        </ol>
+                                    </div>
+    
+                                    <h6 style="color: #007BFF;">b) Elective Subjects (optional):</h6>
+                                    <div style="padding-left: 5%;">
+                                        <ol style="list-style-type: none; padding-left: 0;">
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Psychology:</span> Study of the human mind,
+                                                behavior, and mental processes.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Geography:</span> Study of Earth's physical
+                                                features, climates, and the relationship between humans and their
+                                                environment.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Philosophy:</span> Study of fundamental
+                                                questions regarding existence, knowledge, values, and reason.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Fine Arts:</span> Involves creative
+                                                disciplines like painting, sculpture, and visual arts.
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </section>
+    
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Career Opportunities after Arts Stream</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    The Arts Stream opens up diverse career paths in areas related to humanities, social
+                                    sciences, and creativity. Some potential careers include:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Teaching & Academia</li>
+                                    <li>Journalism & Media</li>
+                                    <li>Psychology & Counseling</li>
+                                    <li>Social Work & NGOs</li>
+                                    <li>Political Analysis</li>
+                                    <li>Public Relations</li>
+                                    <li>Advertising & Marketing</li>
+                                    <li>Graphic Design & Fine Arts</li>
+                                </ol>
+                            </section>
+    
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. Eligibility Criteria</h5>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Minimum Marks in Class 10: Students need to have passed Class 10 with a minimum of
+                                        50-60% marks, depending on the institution.</li>
+                                    <li>Subjects Taken in Class 10: Students should have studied subjects like English,
+                                        Social Studies, and any elective subjects offered.</li>
+                                </ul>
+                            </section>
+    
+                            <!-- Section 5 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">5. Potential Career Paths for Arts Students</h5>
+                                <h6 style="color: #007BFF;">After Completing Class 12 Arts:</h6>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Teaching: Pursue degrees like B.Ed for teaching history, political science, or
+                                        languages.</li>
+                                    <li>Journalism: Opt for courses in Journalism or Mass Communication for a career in
+                                        media.</li>
+                                    <li>Psychology: Enroll in B.A. or B.Sc. Psychology for careers in counseling or therapy.
+                                    </li>
+                                    <li>Social Work: Choose degrees in Social Work for careers in NGOs or community
+                                        development.</li>
+                                </ul>
+    
+                                <h6 style="color: #007BFF;">Postgraduate Studies Options:</h6>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>M.A. in Psychology</li>
+                                    <li>M.A. in Political Science or Sociology</li>
+                                    <li>M.A. in Journalism or Mass Communication</li>
+                                </ul>
+    
+                                <h6 style="color: #007BFF;">Competitive Exams:</h6>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>UPSC: For Civil Services, Indian Administrative Service (IAS), or Indian Foreign
+                                        Services (IFS).</li>
+                                    <li>CAT/MAT: For MBA programs in various management institutes.</li>
+                                    <li>CLAT: For Law admissions in various colleges.</li>
+                                    <li>NET: For teaching and research positions in universities.</li>
+                                </ul>
+                            </section>
+                        </div>
+                    
+                    </p>
+                </div>
+                <div id="ssc-commerce" class="career-details">
+                    <h4>Commmerce</h4>
+                    <p>
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">Commerce Stream Overview</h1>
+                        </header>
+    
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    The Commerce Stream is one of the most popular educational streams that focuses on the
+                                    study of trade, business, finance, and economics. It is ideal for students who are
+                                    interested in pursuing careers in accountancy, business administration, finance,
+                                    economics, and entrepreneurship. The stream emphasizes analytical thinking, business
+                                    acumen, and management skills.
+                                </p>
+                            </section>
+    
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. Subjects in Commerce Stream</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    The Commerce Stream includes a combination of core and elective subjects, offering
+                                    students the flexibility to shape their careers according to their interests. The
+                                    subjects are divided into the following categories:
+                                </p>
+    
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) Core Subjects:</h6>
+                                    <div style="padding-left: 5%;">
+                                        <ol style="list-style-type: lower-roman; padding-left: 0;">
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Accountancy:</span> Study of financial
+                                                transactions, bookkeeping, and preparation of financial statements.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Economics:</span> Focus on microeconomics,
+                                                macroeconomics, and the functioning of economies.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Business Studies:</span> Study of business
+                                                organization, management principles, and entrepreneurship.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">English:</span> A compulsory language
+                                                subject focusing on communication skills and critical thinking.
+                                            </li>
+                                        </ol>
+                                    </div>
+    
+                                    <h6 style="color: #007BFF;">b) Elective Subjects (optional):</h6>
+                                    <div style="padding-left: 5%;">
+                                        <ol style="list-style-type: none; padding-left: 0;">
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Mathematics:</span> Essential for students
+                                                interested in careers in finance, analytics, and economics.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Informatics Practices (IP):</span>
+                                                Introduction to computer programming, data handling, and database
+                                                management.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Entrepreneurship:</span> Study of business
+                                                startups, innovation, and risk management.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Physical Education:</span> Focus on
+                                                fitness, sports science, and overall well-being.
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </section>
+    
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Career Opportunities after Commerce Stream</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    The Commerce Stream opens up various career paths for students, including:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Chartered Accountancy (CA)</li>
+                                    <li>Company Secretary (CS)</li>
+                                    <li>Banking & Finance</li>
+                                    <li>Business Management</li>
+                                    <li>Stock Market Analyst</li>
+                                    <li>Data Analytics</li>
+                                    <li>Law (Corporate Law or General Law)</li>
+                                    <li>Teaching & Academia</li>
+                                </ol>
+                            </section>
+    
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. Eligibility Criteria</h5>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Minimum Marks in Class 10: Students need to have passed Class 10 with a minimum of
+                                        50-60% marks, depending on the institution.</li>
+                                    <li>Subjects Taken in Class 10: Students should have studied Mathematics (optional for
+                                        some boards), English, and Social Studies.</li>
+                                </ul>
+                            </section>
+    
+                            <!-- Section 5 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">5. Potential Career Paths for Commerce Students</h5>
+                                <h6 style="color: #007BFF;">After Completing Class 12 Commerce:</h6>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Accountancy: Pursue courses like CA, CMA, or CPA for careers in accounting and
+                                        auditing.</li>
+                                    <li>Business Administration: Enroll in BBA or BBM programs for managerial roles in
+                                        businesses.</li>
+                                    <li>Finance & Banking: Opt for degrees like B.Com, Bachelor of Banking and Insurance
+                                        (BBI), or Bachelor of Financial Markets (BFM).</li>
+                                    <li>Economics: Pursue a Bachelor’s in Economics for careers in policymaking, research,
+                                        or analysis.</li>
+                                </ul>
+    
+                                <h6 style="color: #007BFF;">Postgraduate Studies Options:</h6>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>M.Com (Master of Commerce)</li>
+                                    <li>MBA (Master of Business Administration)</li>
+                                    <li>LLB (For Law careers)</li>
+                                </ul>
+    
+                                <h6 style="color: #007BFF;">Competitive Exams:</h6>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>CPT/IPCC: For Chartered Accountancy.</li>
+                                    <li>CLAT: For Law admissions.</li>
+                                    <li>CAT/MAT: For MBA programs.</li>
+                                    <li>SSC & Banking Exams: For government and banking sector jobs.</li>
+                                </ul>
+                            </section>
+                        </div>
+                    </p>
+                </div>
+                <div id="ssc-science" class="career-details">
+                    <h4>Science</h4>
+                    <p>
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">Science Stream Overview</h1>
+                        </header>
+    
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    The Science Stream is one of the most sought-after educational streams, offering a
+                                    variety of subjects that help students understand the world around them through
+                                    analytical thinking, reasoning, and experimentation. The stream is popular among
+                                    students who are keen on pursuing careers in engineering, medicine, research, and
+                                    technology.
+                                </p>
+                            </section>
+    
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. Subjects in Science Stream</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    The Science Stream consists of a combination of core and elective subjects, depending on
+                                    the student's choice. The major subjects are divided into two categories:
+                                </p>
+    
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) Core Subjects:</h6>
+                                    <div style="padding-left: 5%;">
+                                        <ol style="list-style-type: lower-roman; padding-left: 0;">
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Physics:</span> The study of matter,
+                                                energy, and the interactions between them.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Chemistry:</span> The science of
+                                                substances, their properties, reactions, and how they change.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Mathematics:</span> The study of numbers,
+                                                shapes, and patterns, essential for engineering, technology, and various
+                                                fields.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Biology:</span> The study of living
+                                                organisms, their structure, function, and the relationships between them.
+                                            </li>
+                                        </ol>
+                                    </div>
+    
+                                    <h6 style="color: #007BFF;">b) Elective Subjects (optional):</h6>
+                                    <div style="padding-left: 5%;">
+                                        <ol style="list-style-type:lower-roman; padding-left: 0;">
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Computer Science:</span> Introduction to
+                                                computer programming, data structures, algorithms, and software development.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Environmental Science:</span> Study of
+                                                environmental issues, sustainability, and conservation.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Geography:</span> Study of Earth's
+                                                landscapes, environments, and the relationships between people and their
+                                                environments.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Physical Education:</span> Focus on
+                                                fitness, sports science, and physical well-being.
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </section>
+    
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Career Opportunities after Science Stream</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    The Science Stream opens up a wide range of career opportunities. Some of the potential
+                                    careers include:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Engineering</li>
+                                    <li>Medicine & Healthcare</li>
+                                    <li>Science & Research</li>
+                                    <li>Technology & IT</li>
+                                    <li>Environmental Sciences</li>
+                                    <li>Teaching & Academia</li>
+                                </ol>
+                            </section>
+    
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. Eligibility Criteria</h5>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Minimum Marks in Class 10: Students need to have passed their Class 10 with a
+                                        minimum of 50-60% marks, depending on the board and institution.</li>
+                                    <li>Subjects Taken in Class 10: Students should have studied subjects like Mathematics,
+                                        Science (Physics, Chemistry, Biology), and English.</li>
+                                </ul>
+                            </section>
+    
+                            <!-- Section 5 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">5. Potential Career Paths for Science Students</h5>
+                                <h6 style="color: #007BFF;">After Completing Class 12 Science:</h6>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Engineering: Students can pursue engineering degrees in various disciplines.</li>
+                                    <li>Medical Science: A popular choice for students pursuing MBBS, BDS, Nursing, or other
+                                        medical degrees.</li>
+                                    <li>Computer Science: Pursue degrees like BCA, BSc Computer Science, or IT-related
+                                        degrees.</li>
+                                    <li>Pure Sciences: Students can opt for B.Sc. in Physics, Chemistry, or Biology for
+                                        research-focused careers.</li>
+                                </ul>
+    
+                                <h6 style="color: #007BFF;">Postgraduate Studies Options:</h6>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>M.Tech (for Engineering students)</li>
+                                    <li>MD (for Medical students)</li>
+                                    <li>M.Sc (for Science students)</li>
+                                </ul>
+    
+                                <h6 style="color: #007BFF;">Competitive Exams:</h6>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>JEE Main/Advanced: For Engineering</li>
+                                    <li>NEET: For Medicine</li>
+                                    <li>GATE: For Postgraduate Engineering Course</li>
+                                    <li>CSIR-NET: For Research in Science</li>
+                                </ul>
+                            </section>
+                        </div>
+    
+    
+    
+                        </p>
+                    </div>
+                    <div id="ssc-diploma" class="career-details">
+                        <h4>Diploma</h4>
+                        <p>
+    
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">Diploma Stream Overview</h1>
+                        </header>
+    
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    The Diploma Stream offers practical, hands-on training for students who want to enter
+                                    the workforce quickly with specialized skills. It provides courses in various technical
+                                    fields like engineering, hospitality, design, and healthcare. A diploma program is often
+                                    a great alternative for students who wish to gain expertise in a specific domain without
+                                    the commitment of a full bachelor's degree.
+                                </p>
+                            </section>
+    
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. Subjects in Diploma Stream</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    Diploma programs vary depending on the field of study. The subjects are categorized
+                                    based on the specific diploma stream chosen:
+                                </p>
+    
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) Core Subjects (based on specialization):</h6>
+                                    <div style="padding-left: 5%;">
+                                        <ol style="list-style-type: lower-roman; padding-left: 0;">
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Diploma in Engineering:</span> Subjects
+                                                like Applied Mathematics, Engineering Mechanics, Engineering Drawing,
+                                                Electrical Engineering, Mechanical Engineering, Civil Engineering, and
+                                                Computer Science.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Diploma in Hospitality:</span> Subjects
+                                                like Front Office Management, Food Production, Housekeeping, and Event
+                                                Management.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Diploma in Design:</span> Subjects like
+                                                Fashion Design, Graphic Design, Textile Design, and Interior Designing.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Diploma in Healthcare:</span> Subjects like
+                                                Medical Terminology, Anatomy, Physiology, Patient Care, and Nursing.
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </section>
+    
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Career Opportunities after Diploma Stream</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    Diploma programs provide students with practical skills that open up a wide range of
+                                    career opportunities. Some potential career paths include:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Engineering Technician</li>
+                                    <li>Mechanical Technician</li>
+                                    <li>Civil Engineer Assistant</li>
+                                    <li>Graphic Designer</li>
+                                    <li>Fashion Designer</li>
+                                    <li>Hotel Management Professional</li>
+                                    <li>Healthcare Assistant</li>
+                                    <li>Event Manager</li>
+                                </ol>
+                            </section>
+    
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. Eligibility Criteria</h5>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Minimum Marks in Class 10: Students need to have passed Class 10 with a minimum of
+                                        50-60% marks, depending on the institution and the specific diploma program.</li>
+                                    <li>Subjects Taken in Class 10: Students should have studied subjects like Mathematics,
+                                        Science, and English for most technical diploma courses.</li>
+                                </ul>
+                            </section>
+    
+                            <!-- Section 5 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">5. Potential Career Paths for Diploma Students</h5>
+                                <h6 style="color: #007BFF;">After Completing a Diploma:</h6>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Engineering Technicians: Diploma holders can work as technical assistants in various
+                                        engineering fields.</li>
+                                    <li>Healthcare Professionals: Diploma holders can work in hospitals, clinics, or
+                                        healthcare facilities as assistants or technicians.</li>
+                                    <li>Hospitality Industry: A diploma in hospitality can lead to careers in hotel
+                                        management, catering, and event management.</li>
+                                    <li>Design and Fashion: Diploma holders in design or fashion can pursue careers in
+                                        graphic design, fashion design, and related fields.</li>
+                                </ul>
+    
+                                <h6 style="color: #007BFF;">Postgraduate Studies Options:</h6>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>After completing a diploma, students can opt for a Bachelor's degree in the same or
+                                        related field (e.g., B.Tech, BBA, BSc in relevant domains).</li>
+                                </ul>
+    
+                                <h6 style="color: #007BFF;">Competitive Exams:</h6>
+                                <ul
+                                    style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Entrance Exams for Degree Courses: Students may need to appear for entrance exams
+                                        for admission to degree programs after completing their diploma.</li>
+                                    <li>State-Level Exams: Various states conduct entrance exams for admission into diploma
+                                        programs and further studies.</li>
+                                </ul>
+                            </section>
+                        </div>
+                    </p>
+                </div>
+               
+                <div id="ssc-other" class="career-details">
+                    <h4>Others</h4>
+                    <p>
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">Other Courses After 10th Overview</h1>
+                        </header>
+                        
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    After completing Class 10, students can explore a wide range of professional courses that prepare them for specific careers. These courses cater to different interests and skills, ranging from technical training to creative arts. These courses usually involve hands-on learning, industry exposure, and opportunities to develop expertise in specialized fields.
+                                </p>
+                            </section>
+                        
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">1. Popular Professional Courses After 10th</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    Students can choose from various professional courses, such as:
+                                </p>
+                        
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) Engineering Diploma</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Engineering Diploma courses are available in various streams like Civil, Mechanical, Electrical, and Computer Science. These programs offer practical skills and can be a stepping stone for students who wish to pursue a B.Tech/B.E. later.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">b) ITI (Industrial Training Institutes)</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            ITI offers vocational training in fields like welding, electrician work, fitter, plumbing, and more. This course provides hands-on technical skills and prepares students for careers in industrial and manual labor sectors.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">c) Animation, VFX, and Multimedia</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Students with an interest in digital arts can pursue professional courses in Animation, VFX, and Multimedia. These programs focus on creating visual effects, 2D/3D animation, and multimedia production, leading to careers in gaming, films, and advertising.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">d) Fashion Design</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            For creative individuals, fashion design courses offer skills in designing clothing, textiles, and accessories. Students can explore careers in fashion houses, retail brands, and the entertainment industry.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">e) Event Management</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Event Management courses teach students how to plan and manage events, conferences, exhibitions, and weddings. This industry is ideal for those with strong organizational and communication skills.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">f) Hotel Management</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Hotel Management programs prepare students for roles in the hospitality industry. Courses cover hotel operations, front office management, catering, and customer service, leading to careers in hotels, resorts, and restaurants.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">g) Travel and Tourism</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Travel and Tourism courses introduce students to the tourism industry, including travel planning, tour guiding, hospitality, and tourism marketing. Graduates can work in travel agencies, airlines, and tour companies.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">h) Journalism and Mass Communication</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Journalism and Mass Communication courses prepare students for careers in media, broadcasting, news reporting, and public relations. It is suitable for individuals with strong communication and writing skills.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">i) Commercial Pilot Training</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            For students passionate about aviation, commercial pilot training offers the opportunity to pursue a career as a pilot. This course covers the technical and practical aspects of flying, navigation, and aviation regulations.
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. Career Opportunities after Professional Courses</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    Upon completion of these courses, students can explore several career opportunities, including:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Diploma Engineer</li>
+                                    <li>ITI Technician</li>
+                                    <li>Animator/Graphic Designer</li>
+                                    <li>Fashion Designer</li>
+                                    <li>Event Manager</li>
+                                    <li>Hotel Manager</li>
+                                    <li>Tourism and Travel Specialist</li>
+                                    <li>Journalist/Reporter</li>
+                                    <li>Commercial Pilot</li>
+                                </ol>
+                            </section>
+                        
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Eligibility Criteria</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Minimum Marks in Class 10: Students should have passed Class 10 with a minimum of 50-60% marks, depending on the course.</li>
+                                    <li>Subject Requirements: Specific courses may require certain subjects like Mathematics, Science, or English in Class 10.</li>
+                                </ul>
+                            </section>
+                        
+                            <!-- Section 5 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. Competitive Exams for Professional Courses</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Polytechnic Entrance Exams (for Diploma Courses)</li>
+                                    <li>ITI Entrance Exams</li>
+                                    <li>Fashion Design Entrance Exams (NIFT)</li>
+                                    <li>Hotel Management Entrance Exams</li>
+                                    <li>Pilot Training Entrance Exams</li>
+                                </ul>
+                            </section>
+                        </div>
+                        
+                    </p>
+                </div>
+            </div>
+
+            <!-- Career container for HSC -->
+            <div id="hsc-container" class="career-container"style="text-align: center; border">
+                <h3>Career Options After HSC</h3>
+                <button onclick="showDetails('hsc-arts', 'hsc-container')">Bachelor's in Arts</button>
+                <button onclick="showDetails('hsc-commerce', 'hsc-container')">Bachelor's in Commmerce</button>
+                <button onclick="showDetails('hsc-science', 'hsc-container')">bachelor's in Science</button>
+                <button onclick="showDetails('hsc-professional', 'hsc-container')">Professional Courses</button>
+                <button onclick="showDetails('hsc-it', 'hsc-container')">IT</button>
+                <button onclick="showDetails('hsc-other', 'hsc-container')">Other</button>
+
+                <div id="hsc-arts" class="career-details">
+                    <h4>Bachelor's in Arts</h4>
+                    <p>
+                        
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">Bachelor of Arts (B.A.) Stream Overview</h1>
+                        </header>
+                        
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    A Bachelor of Arts (B.A.) degree offers a broad range of subjects in the humanities, social sciences, and liberal arts. This program emphasizes critical thinking, analytical skills, and intellectual growth. Students can specialize in various disciplines like literature, history, sociology, psychology, political science, philosophy, and more. A B.A. degree is often the first step for students pursuing careers in education, media, law, public administration, and creative industries.
+                                </p>
+                            </section>
+                        
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. Subjects in Bachelor of Arts (B.A.)</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    The B.A. degree offers a variety of subjects, enabling students to pursue their interests in various fields. The subjects are broadly categorized into core and elective areas:
+                                </p>
+                        
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) Core Subjects:</h6>
+                                    <div style="padding-left: 5%;">
+                                        <ol style="list-style-type: lower-roman; padding-left: 0;">
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">English Literature:</span> The study of English literature, including classical and modern works, poetry, drama, and prose.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">History:</span> The study of historical events, cultures, and societies, examining how past events shaped the present.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Political Science:</span> The study of political systems, governments, and the role of individuals and institutions in society.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Philosophy:</span> The study of fundamental questions regarding existence, knowledge, ethics, and reason.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Sociology:</span> The study of society, social behavior, and the dynamics of social groups, institutions, and structures.
+                                            </li>
+                                        </ol>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">b) Elective Subjects (optional):</h6>
+                                    <div style="padding-left: 5%;">
+                                        <ol style="list-style-type: none; padding-left: 0;">
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Psychology:</span> The study of the human mind, behavior, emotions, cognition, and mental processes.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Economics:</span> The study of how societies allocate resources, the functioning of markets, and economic policies.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Geography:</span> The study of Earth's landscapes, environments, and the relationships between people and their surroundings.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Fine Arts:</span> The study of visual arts, including painting, sculpture, and other forms of creative expression.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Journalism:</span> The study of media, communication, news writing, and reporting.
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Career Opportunities after B.A.</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    A B.A. degree opens up numerous career opportunities across various fields. Some of the potential careers include:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Teacher/Professor</li>
+                                    <li>Journalist/Writer</li>
+                                    <li>Political Analyst</li>
+                                    <li>Social Worker</li>
+                                    <li>HR Manager</li>
+                                    <li>Advertising/PR Specialist</li>
+                                    <li>Content Creator</li>
+                                    <li>Government Jobs (UPSC, Civil Services)</li>
+                                </ol>
+                            </section>
+                        
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. Eligibility Criteria</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Minimum Marks in Class 12: Students need to have passed their Class 12 with a minimum of 50-60% marks, depending on the institution.</li>
+                                    <li>Subjects Taken in Class 12: Students should have studied relevant subjects like Humanities, Social Sciences, or Languages in Class 12.</li>
+                                </ul>
+                            </section>
+                        
+                            <!-- Section 5 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">5. Potential Career Paths for B.A. Students</h5>
+                                <h6 style="color: #007BFF;">After Completing Class 12 and B.A.:</h6>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Teaching: Students can become school teachers or university professors by pursuing a B.Ed. or higher education.</li>
+                                    <li>Media and Journalism: Graduates can work as journalists, editors, or media professionals in print, digital, or broadcast media.</li>
+                                    <li>Social Services: Students can pursue careers in NGOs, social work, or public administration.</li>
+                                    <li>Public Relations/Advertising: Graduates can work in advertising, marketing, or public relations firms.</li>
+                                    <li>Government Jobs: A B.A. degree opens doors for civil services and other government roles through competitive exams (UPSC, SSC, etc.).</li>
+                                </ul>
+                        
+                                <h6 style="color: #007BFF;">Postgraduate Studies Options:</h6>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>MA (Master of Arts in specialized fields like Political Science, Psychology, Sociology, etc.)</li>
+                                    <li>MBA (for students interested in business and management)</li>
+                                    <li>LLB (for students pursuing a career in law)</li>
+                                    <li>MSW (Master of Social Work for students interested in social services)</li>
+                                </ul>
+                        
+                                <h6 style="color: #007BFF;">Competitive Exams:</h6>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>UPSC Civil Services Exam: For government and administrative roles</li>
+                                    <li>CAT: For MBA admissions</li>
+                                    <li>NET (National Eligibility Test): For university-level teaching</li>
+                                    <li>CLAT: For law school admissions</li>
+                                </ul>
+                            </section>
+                        </div>
+                        
+                    </p>
+                </div>
+                <div id="hsc-commerce" class="career-details">
+                    <h4>Bachelor’s in Commerce</h4>
+                    <p>
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">Bachelor of Commerce (B.Com.) Stream Overview</h1>
+                        </header>
+                        
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    The Bachelor of Commerce (B.Com.) is one of the most popular undergraduate degrees pursued by students interested in business, finance, economics, and accounting. The B.Com. program provides students with a deep understanding of financial management, taxation, business law, economics, and more. It is an ideal foundation for those looking to enter the business world, pursue higher education in commerce, or prepare for professional certifications in accounting and finance.
+                                </p>
+                            </section>
+                        
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. Subjects in Bachelor of Commerce (B.Com.)</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    The B.Com. degree offers a range of subjects to equip students with the knowledge necessary for various career paths in commerce. The subjects are divided into core and elective areas:
+                                </p>
+                        
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) Core Subjects:</h6>
+                                    <div style="padding-left: 5%;">
+                                        <ol style="list-style-type: lower-roman; padding-left: 0;">
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Accounting:</span> The study of financial transactions, balance sheets, and profit and loss statements.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Business Law:</span> The study of legal principles and regulations governing businesses and commercial transactions.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Economics:</span> The study of economic principles, including microeconomics, macroeconomics, and international trade.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Business Communication:</span> The study of effective communication techniques used in business settings.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Statistics:</span> The study of data collection, analysis, and interpretation, particularly in the context of business and economics.
+                                            </li>
+                                        </ol>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">b) Elective Subjects (optional):</h6>
+                                    <div style="padding-left: 5%;">
+                                        <ol style="list-style-type: none; padding-left: 0;">
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Taxation:</span> The study of tax laws, tax planning, and strategies for businesses and individuals.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Auditing:</span> The study of the examination of financial records to ensure accuracy and compliance.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Banking and Insurance:</span> The study of financial institutions, insurance products, and banking services.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Entrepreneurship:</span> The study of starting and managing new business ventures.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Corporate Finance:</span> The study of financial management in large corporations, including capital structure and investment decisions.
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Career Opportunities after B.Com.</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    A B.Com. degree opens doors to numerous career opportunities in the fields of finance, accounting, banking, and business. Some of the potential careers include:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Chartered Accountant (CA)</li>
+                                    <li>Company Secretary (CS)</li>
+                                    <li>Cost Accountant</li>
+                                    <li>Banking and Financial Services</li>
+                                    <li>Insurance Analyst</li>
+                                    <li>Auditor</li>
+                                    <li>Tax Consultant</li>
+                                    <li>Entrepreneur</li>
+                                </ol>
+                            </section>
+                        
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. Eligibility Criteria</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Minimum Marks in Class 12: Students need to have passed their Class 12 with a minimum of 50-60% marks, depending on the institution.</li>
+                                    <li>Subjects Taken in Class 12: Students should have studied Commerce or similar subjects in Class 12.</li>
+                                </ul>
+                            </section>
+                        
+                            <!-- Section 5 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">5. Potential Career Paths for B.Com. Students</h5>
+                                <h6 style="color: #007BFF;">After Completing Class 12 and B.Com.:</h6>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Chartered Accountant (CA): Students can pursue CA to specialize in accounting and taxation.</li>
+                                    <li>Company Secretary (CS): A professional qualification to manage corporate governance and legal affairs.</li>
+                                    <li>Banking and Financial Services: Graduates can enter the banking sector in roles like investment banking, financial analysis, or risk management.</li>
+                                    <li>Auditing and Taxation: B.Com. graduates can work as auditors, tax consultants, or financial advisors.</li>
+                                    <li>Entrepreneurship: B.Com. graduates with an entrepreneurial mindset can start their own businesses or consult on business operations.</li>
+                                </ul>
+                        
+                                <h6 style="color: #007BFF;">Postgraduate Studies Options:</h6>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>M.Com (Master of Commerce)</li>
+                                    <li>MBA (Master of Business Administration) for a career in management</li>
+                                    <li>PGDM (Post Graduate Diploma in Management)</li>
+                                    <li>CA (Chartered Accountancy)</li>
+                                    <li>CS (Company Secretaryship)</li>
+                                </ul>
+                        
+                                <h6 style="color: #007BFF;">Competitive Exams:</h6>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>CA Foundation Exam: For Chartered Accountancy aspirants</li>
+                                    <li>CS Foundation Exam: For Company Secretary aspirants</li>
+                                    <li>CAT: For MBA admissions</li>
+                                    <li>UPSC: For various civil services and government roles</li>
+                                </ul>
+                            </section>
+                        </div>
+                        
+                    </p>
+                </div>
+                <div id="hsc-science" class="career-details">
+                    <h4>Bachelor’s in Science</h4>
+                    <p>
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">Bachelor of Science (B.Sc.) Stream Overview</h1>
+                        </header>
+                        
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    The Bachelor of Science (B.Sc.) is a three-year undergraduate degree that provides students with a strong foundation in the scientific disciplines, focusing on the study of physical, biological, and mathematical sciences. This program is ideal for students with an analytical mindset who wish to pursue careers in research, technology, health sciences, or academics. The B.Sc. program offers various specializations, depending on the student's interests and career goals.
+                                </p>
+                            </section>
+                        
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. Subjects in Bachelor of Science (B.Sc.)</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    The B.Sc. degree offers a wide range of subjects, and students can choose their specialization based on their interests. Some of the common subjects offered in B.Sc. include:
+                                </p>
+                        
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) Core Subjects (depending on specialization):</h6>
+                                    <div style="padding-left: 5%;">
+                                        <ol style="list-style-type: lower-roman; padding-left: 0;">
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Physics:</span> The study of matter, energy, and the interactions between them.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Chemistry:</span> The study of substances, their properties, reactions, and how they change.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Biology:</span> The study of living organisms, their structures, functions, and relationships.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Mathematics:</span> The study of numbers, patterns, structures, and changes, essential for fields like physics, engineering, and economics.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">Environmental Science:</span> The study of environmental issues and the impact of human activities on the planet.
+                                            </li>
+                                        </ol>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">b) Specializations (optional):</h6>
+                                    <div style="padding-left: 5%;">
+                                        <ol style="list-style-type: none; padding-left: 0;">
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">B.Sc. in Physics:</span> Focuses on understanding the fundamental laws of nature, including classical and modern physics.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">B.Sc. in Chemistry:</span> Focuses on chemical reactions, molecular structures, and properties of substances.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">B.Sc. in Biology:</span> Covers a wide range of topics, from microbiology and genetics to ecology and physiology.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">B.Sc. in Mathematics:</span> Focuses on pure and applied mathematics, including calculus, algebra, statistics, and data analysis.
+                                            </li>
+                                            <li style="margin-bottom: 10px; font-size: 1.1em; color: #333;">
+                                                <span style="font-weight: bold;">B.Sc. in Computer Science:</span> Focuses on computing fundamentals, programming languages, software engineering, and database management.
+                                            </li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Career Opportunities after B.Sc.</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    A B.Sc. degree opens doors to a wide range of career opportunities in various fields such as research, healthcare, technology, and education. Some potential careers include:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Research Scientist</li>
+                                    <li>Data Analyst</li>
+                                    <li>Software Developer</li>
+                                    <li>Lab Technician</li>
+                                    <li>Environmental Consultant</li>
+                                    <li>Medical Laboratory Technician</li>
+                                    <li>Teaching & Academia</li>
+                                    <li>Pharmaceuticals</li>
+                                </ol>
+                            </section>
+                        
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. Eligibility Criteria</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Minimum Marks in Class 12: Students need to have passed their Class 12 with a minimum of 50-60% marks, depending on the institution and specialization.</li>
+                                    <li>Subjects Taken in Class 12: Students should have studied subjects like Physics, Chemistry, Mathematics, or Biology in their Class 12.</li>
+                                </ul>
+                            </section>
+                        
+                            <!-- Section 5 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">5. Potential Career Paths for B.Sc. Students</h5>
+                                <h6 style="color: #007BFF;">After Completing Class 12 and B.Sc.:</h6>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Research: B.Sc. graduates can pursue a career in research and development, working in government or private research labs.</li>
+                                    <li>Teaching: Graduates can become teachers in schools or colleges after completing a B.Ed. or M.Sc.</li>
+                                    <li>Healthcare: Graduates can enter the healthcare industry as lab technicians, medical researchers, or work in pharmaceuticals.</li>
+                                    <li>Environmental Science: Graduates can work in environmental consulting, sustainability, or wildlife conservation.</li>
+                                    <li>IT and Software: B.Sc. graduates with Computer Science specialization can pursue software development, web development, or data science.</li>
+                                </ul>
+                        
+                                <h6 style="color: #007BFF;">Postgraduate Studies Options:</h6>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>M.Sc. (Master of Science) in various specializations</li>
+                                    <li>MCA (Master of Computer Applications)</li>
+                                    <li>Ph.D. in specialized fields for research-oriented careers</li>
+                                </ul>
+                        
+                                <h6 style="color: #007BFF;">Competitive Exams:</h6>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>JEST: For Ph.D. programs in Science</li>
+                                    <li>GATE: For postgraduate studies in Engineering and Technology</li>
+                                    <li>NET: For research and teaching in Science</li>
+                                    <li>CSIR-NET: For research-focused careers in Science</li>
+                                    <li>Medical Entrance Exams: For pursuing medical degrees</li>
+                                </ul>
+                            </section>
+                        </div>
+                        
+                    </p>
+                </div>
+                <div id="hsc-professional" class="career-details">
+                    <h4>Professional Courses</h4>
+                    <p>
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">Professional Courses After 12th Overview</h1>
+                        </header>
+                        
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    After completing Class 12, students have the option to pursue various professional courses that prepare them for specific careers in fields like law, management, design, healthcare, and more. These courses are designed to equip students with the necessary skills and knowledge to excel in their chosen professions. Professional courses are typically industry-oriented, offering hands-on training, internships, and opportunities for networking.
+                                </p>
+                            </section>
+                        
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. Popular Professional Courses After 12th</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    Students can choose from a wide range of professional courses based on their interests, including:
+                                </p>
+                        
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) Engineering</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Engineering is one of the most popular professional courses after 12th. Students can pursue a B.Tech/B.E. degree in various fields such as Computer Science, Mechanical, Civil, Electrical, Electronics, and more. This course prepares students for careers in technology, design, construction, and manufacturing.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">b) Medical Sciences</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            For students interested in healthcare, medical sciences offers various professional programs. A popular choice is pursuing an MBBS degree, but other options include BDS (Dentistry), BAMS (Ayurvedic Medicine), BHMS (Homeopathy), Nursing, Physiotherapy, and Paramedical courses.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">c) Law</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            After completing 12th, students can pursue a 5-year integrated law course such as BA LLB or BBA LLB. Law courses prepare students for careers in legal practice, corporate law, civil services, and judiciary.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">d) Design</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Design courses, such as Fashion Design, Interior Design, and Graphic Design, are ideal for creative students. These courses focus on developing design thinking, innovation, and practical skills in various fields of design.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">e) Animation and Multimedia</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Animation and multimedia courses cover areas like 2D/3D animation, VFX, gaming, and film production. Students pursuing these courses can work in media, entertainment, gaming, and film industries.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">f) Business and Management</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Students can pursue professional courses such as BBA (Bachelor of Business Administration), BMS (Bachelor of Management Studies), and Hotel Management. These courses prepare students for leadership roles in business, marketing, and operations.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">g) Animation, VFX, and Multimedia</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Animation, VFX, and Multimedia courses are designed for students with a passion for digital arts, media, and entertainment. Graduates can pursue careers in media, advertising, visual effects, and gaming.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">h) Hotel Management</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Hotel Management courses provide knowledge of the hospitality industry, including hotel operations, catering, and customer service. Graduates can work in hotels, resorts, restaurants, and travel agencies.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">i) Aviation and Pilots</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Students interested in aviation can pursue courses like Pilot Training, Air Hostess Training, or Airport Ground Services. These courses lead to careers in the airline industry, with roles such as pilots, cabin crew, and ground staff.
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Career Opportunities after Professional Courses</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    Professional courses equip students with specific skills required to excel in their chosen career paths. Some of the potential career opportunities include:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Engineer</li>
+                                    <li>Doctor (MBBS, BDS, Nursing)</li>
+                                    <li>Lawyer</li>
+                                    <li>Fashion Designer</li>
+                                    <li>Animator/Multimedia Artist</li>
+                                    <li>Business Executive/Manager</li>
+                                    <li>Hotel Manager</li>
+                                    <li>Aviation Professional (Pilot, Cabin Crew)</li>
+                                </ol>
+                            </section>
+                        
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. Eligibility Criteria</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Minimum Marks in Class 12: Students should have passed Class 12 with a minimum of 50-60% marks, depending on the course.</li>
+                                    <li>Subject Requirements: Certain courses require specific subjects in Class 12, such as Physics and Mathematics for Engineering, Biology for Medical courses, or Commerce for Management courses.</li>
+                                </ul>
+                            </section>
+                        
+                            <!-- Section 5 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">5. Competitive Exams for Professional Courses</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>JEE Main/Advanced: For Engineering</li>
+                                    <li>NEET: For Medical Admissions</li>
+                                    <li>CLAT: For Law Admissions</li>
+                                    <li>CAT: For Business Management (MBA)</li>
+                                    <li>NIFT: For Fashion Design</li>
+                                    <li>Hotel Management Entrance Exams</li>
+                                    <li>Pilot Training Exams</li>
+                                </ul>
+                            </section>
+                        </div>
+                        
+                    </p>
+                </div>
+
+                <div id="hsc-it" class="career-details">
+                    <h4>IT fields</h4>
+                    <p>
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">IT Career Options after HSC</h1>
+                        </header>
+                        
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    Information Technology (IT) is one of the fastest-growing sectors, offering a variety of career opportunities for students after completing their HSC (12th Standard). With advancements in technology, IT professionals play a crucial role in shaping industries across the globe. Students interested in coding, networking, cybersecurity, and emerging technologies can explore various IT-focused courses and career paths.
+                                </p>
+                            </section>
+                        
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. IT Courses after HSC</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    Students can pursue a variety of IT-related courses based on their interests and career goals. Some popular options include:
+                                </p>
+                        
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) Bachelor of Computer Applications (BCA)</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            A three-year undergraduate program focused on programming languages, software development, and computer systems. BCA graduates can work as software developers, web designers, or system analysts.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">b) B.Sc. in Information Technology (B.Sc. IT)</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            This course emphasizes IT fundamentals, including programming, networking, databases, and cybersecurity. Graduates can pursue careers in IT management, database administration, or technical support.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">c) Diploma in IT</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            A shorter and specialized program covering core IT skills, such as software engineering, networking, and web development. This option is ideal for students looking to enter the IT workforce quickly.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">d) Web Development and Design Courses</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            These courses focus on building websites and web applications. Students learn HTML, CSS, JavaScript, and frameworks like Angular or React. Careers include Web Developer or Front-End Developer.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">e) Game Design and Development</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Students interested in gaming can opt for this course, which teaches game programming, design, and 3D modeling. Graduates can work in the gaming and animation industries.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">f) Certification in Ethical Hacking and Cybersecurity</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            A certification course focusing on network security, ethical hacking, and protecting systems from cyber threats. Professionals can work as Cybersecurity Analysts or Ethical Hackers.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">g) Cloud Computing and DevOps</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Specialized courses in cloud platforms like AWS, Azure, and Google Cloud, combined with DevOps practices. Graduates can become Cloud Engineers or DevOps Specialists.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">h) Artificial Intelligence and Machine Learning (AI & ML)</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            AI & ML courses teach students about intelligent systems, data processing, and predictive modeling. Graduates can work in fields like AI development, data analysis, and robotics.
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Career Opportunities in IT</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    After completing IT-related courses, students can pursue diverse career opportunities, such as:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Software Developer</li>
+                                    <li>Web Designer/Developer</li>
+                                    <li>IT Support Specialist</li>
+                                    <li>Database Administrator</li>
+                                    <li>Cybersecurity Analyst</li>
+                                    <li>Cloud Engineer</li>
+                                    <li>Game Developer</li>
+                                    <li>AI/ML Engineer</li>
+                                    <li>Network Administrator</li>
+                                </ol>
+                            </section>
+                        
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. Eligibility Criteria</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Minimum Marks: Students must have passed their HSC with at least 50% marks.</li>
+                                    <li>Subject Requirements: Most IT courses require Mathematics as a subject in HSC.</li>
+                                    <li>Entrance Exams: Some institutes conduct entrance tests for admission to IT programs.</li>
+                                </ul>
+                            </section>
+                        
+                            <!-- Section 5 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">5. Advantages of Pursuing IT Careers</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>High demand for IT professionals across industries.</li>
+                                    <li>Opportunities for global employment and remote work.</li>
+                                    <li>Dynamic field with constant technological advancements.</li>
+                                    <li>Lucrative salary packages and career growth potential.</li>
+                                </ul>
+                            </section>
+                        </div>
+                        
+                    </p>
+                </div>
+
+                <div id="hsc-other" class="career-details">
+                    <h4>Other</h4>
+                    <p>
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">Professional Courses After HSC Overview</h1>
+                        </header>
+                        
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    After completing Class 12 (HSC), students have a wide variety of options available in terms of professional courses. These courses equip students with specialized skills in various sectors like business, design, technology, healthcare, and more. Many of these programs have a strong emphasis on industry readiness, preparing students for immediate employment or further academic pursuits.
+                                </p>
+                            </section>
+                        
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. Popular Professional Courses After HSC</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    Students can choose from a variety of professional courses, such as:
+                                </p>
+                        
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) Animation, VFX, and Multimedia</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            These courses focus on digital arts, 2D/3D animation, visual effects, and multimedia production. Students can pursue careers in the entertainment industry, advertising, gaming, and media production.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">b) Fashion Design</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Fashion Design courses are perfect for creative students interested in the apparel industry. They cover various aspects of designing clothing, textiles, and accessories, along with an understanding of the fashion market.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">c) Hotel Management</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Hotel Management programs focus on hospitality, customer service, catering, and the overall management of hotel operations. Graduates can work in the hospitality industry, including hotels, resorts, and restaurants.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">d) Aviation and Pilots</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            For students interested in the aviation industry, courses in pilot training, air hostess training, and airport ground services are ideal. These courses prepare students for careers in airlines, airports, and aviation-related fields.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">e) Mass Communication and Journalism</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Journalism and Mass Communication courses offer in-depth knowledge of the media industry, including news reporting, editing, broadcasting, and public relations. Graduates can pursue careers as journalists, editors, or media professionals.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">f) Event Management</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Event Management courses prepare students to organize and manage various events such as weddings, corporate events, exhibitions, and conferences. This field requires strong organizational and communication skills.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">g) Digital Marketing</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Digital Marketing courses cover topics such as SEO, content marketing, social media strategies, and online advertising. Graduates can pursue careers in digital marketing agencies, startups, or large corporations.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">h) Interior Designing</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Interior Designing courses teach students how to design spaces such as homes, offices, and commercial establishments. Students develop a strong understanding of color theory, furniture design, and space planning.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">i) Law (5-year Integrated LLB)</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            After completing HSC, students can pursue a 5-year integrated law program, such as BA LLB or BBA LLB. These programs prepare students for careers in legal practice, corporate law, or judiciary.
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Career Opportunities after Professional Courses</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    After completing these professional courses, students can explore several career opportunities, including:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Animator/Graphic Designer</li>
+                                    <li>Fashion Designer</li>
+                                    <li>Hotel Manager</li>
+                                    <li>Pilot</li>
+                                    <li>Journalist/Reporter</li>
+                                    <li>Event Manager</li>
+                                    <li>Digital Marketing Specialist</li>
+                                    <li>Interior Designer</li>
+                                    <li>Lawyer (After Completing LLB)</li>
+                                </ol>
+                            </section>
+                        
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. Eligibility Criteria</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Minimum Marks in Class 12: Students should have passed Class 12 with a minimum of 50-60% marks, depending on the course.</li>
+                                    <li>Subject Requirements: Certain courses require specific subjects, such as Physics and Mathematics for Design or Engineering-related fields, or Journalism for Mass Communication.</li>
+                                </ul>
+                            </section>
+                        
+                            <!-- Section 5 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">5. Competitive Exams for Professional Courses</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>CLAT: For Law Admissions</li>
+                                    <li>NIFT: For Fashion Design</li>
+                                    <li>Common Entrance Exams for Hotel Management</li>
+                                    <li>Pilot Training Exams</li>
+                                    <li>Journalism Entrance Exams</li>
+                                    <li>Digital Marketing Certifications</li>
+                                </ul>
+                            </section>
+                        </div>
+                        
+
+                    </p>
+                </div>
+            </div>
+
+            <!-- Career container for Graduation -->
+            <div id="graduation-container" class="career-container"style="text-align: center; border">
+                <h3>Career Options After Graduation</h3>
+                <button onclick="showDetails('grad-arts', 'graduation-container')">Master's in Arts</button>
+                <button onclick="showDetails('grad-commerce', 'graduation-container')">Master's in Commerce</button>
+                <button onclick="showDetails('grad-science', 'graduation-container')">Master's in Science</button>
+                <button onclick="showDetails('grad-competitive', 'graduation-container')">Competitive Exams</button>
+                <button onclick="showDetails('grad-other', 'graduation-container')">Other</button>
+
+                <div id="grad-arts" class="career-details">
+                    <h4>Master's in Arts</h4>
+                    <p>
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">Masters of Arts Overview</h1>
+                        </header>
+                        
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    Master of Arts (MA) is a postgraduate program in the field of humanities and social sciences. It offers students an opportunity to specialize in various disciplines, including literature, history, economics, sociology, political science, and more. The program typically involves in-depth research, practical knowledge, and critical thinking skills, preparing students for a wide range of careers in education, research, government, media, and other sectors.
+                                </p>
+                            </section>
+                        
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. Popular MA Courses</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    Students can choose from various specialized MA courses based on their interests, including:
+                                </p>
+                        
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) MA in English Literature</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MA in English Literature offers a deep dive into the works of English authors, poetry, drama, and literary theory. It provides opportunities for research, teaching, and a career in writing and publishing.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">b) MA in History</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MA in History focuses on historical events, periods, and figures, helping students understand the past's influence on present-day societies. It opens up opportunities in research, education, and heritage conservation.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">c) MA in Sociology</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MA in Sociology explores society, social behavior, and institutions. Graduates can work in social work, community service, public policy, or research.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">d) MA in Political Science</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MA in Political Science offers an understanding of political systems, theories, international relations, and governance. This course prepares students for careers in politics, law, public administration, and international organizations.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">e) MA in Economics</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MA in Economics focuses on economic theories, policies, and the role of economics in shaping societies. Graduates can work in research, consultancy, government, and finance sectors.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">f) MA in Psychology</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MA in Psychology involves the study of the human mind, behavior, and mental health. Students can pursue careers in counseling, therapy, human resources, and research.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">g) MA in Philosophy</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MA in Philosophy covers topics such as ethics, metaphysics, logic, and political philosophy. Graduates can pursue careers in education, research, writing, and counseling.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">h) MA in Journalism and Mass Communication</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MA in Journalism and Mass Communication focuses on media studies, journalism practices, digital media, and public relations. Graduates can work in journalism, broadcasting, advertising, and public relations.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">i) MA in Education</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MA in Education is ideal for students interested in the field of teaching and educational leadership. It covers various aspects of education policy, teaching methodologies, and school management.
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Career Opportunities after MA</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    After completing an MA, students can explore various career opportunities, such as:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Teacher/Lecturer</li>
+                                    <li>Content Writer/Editor</li>
+                                    <li>Journalist/Reporter</li>
+                                    <li>Researcher</li>
+                                    <li>Sociologist</li>
+                                    <li>Political Analyst</li>
+                                    <li>Social Worker</li>
+                                    <li>Psychologist/Counselor</li>
+                                    <li>Public Relations Specialist</li>
+                                </ol>
+                            </section>
+                        
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. Eligibility Criteria</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Minimum Marks in Graduation: Students should have completed a Bachelor's degree in a relevant field with a minimum of 50-60% marks, depending on the course and university.</li>
+                                    <li>Subject Requirements: Some courses may have specific subject requirements from the undergraduate level (e.g., an undergraduate degree in Political Science for MA in Political Science).</li>
+                                </ul>
+                            </section>
+                        
+                            <!-- Section 5 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">5. Entrance Exams for MA Courses</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>JNU Entrance Exam: For various MA courses</li>
+                                    <li>DUET (Delhi University Entrance Test): For MA admissions at Delhi University</li>
+                                    <li>GATE (for specific subjects like Economics, Sociology)</li>
+                                    <li>ICAR AIEEA PG: For MA in Agriculture and related fields</li>
+                                    <li>State University Entrance Exams</li>
+                                </ul>
+                            </section>
+                        </div>
+                        
+                    </p>
+                </div>
+                <div id="grad-commerce" class="career-details">
+                    <h4>Master's in Commerce</h4>
+                    <p>
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">MCom Courses Overview</h1>
+                        </header>
+                        
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    Master of Commerce (MCom) is a postgraduate program designed for students seeking a deeper understanding of commerce, economics, finance, and accounting. It provides advanced knowledge in areas such as business management, taxation, finance, economics, and accounting, preparing students for a variety of roles in the business world. MCom is ideal for those interested in pursuing careers in banking, finance, accounting, and teaching.
+                                </p>
+                            </section>
+                        
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. Popular MCom Courses</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    Students can choose from various specialized MCom courses based on their interests, including:
+                                </p>
+                        
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) MCom in Accounting and Finance</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MCom in Accounting and Finance is designed for students interested in a career in accounting, auditing, finance, and taxation. It covers topics like financial accounting, auditing, cost accounting, and financial management.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">b) MCom in Business Management</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MCom in Business Management focuses on business strategies, marketing, human resources, and operations management. This course prepares students for managerial roles in various sectors, including business consultancy and corporate management.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">c) MCom in International Business</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MCom in International Business focuses on global trade, international marketing, and business law. It prepares students for roles in international trade, export-import management, and multinational corporations.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">d) MCom in Economics</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MCom in Economics is for students interested in studying economic theories, policies, and their applications. Graduates can pursue careers in government, banking, policy analysis, and economic research.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">e) MCom in Taxation</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MCom in Taxation offers expertise in taxation policies, laws, and tax planning strategies. This specialization is ideal for those pursuing careers in taxation, law firms, or as tax consultants.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">f) MCom in Banking and Finance</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MCom in Banking and Finance is focused on the financial sector, covering topics like banking regulations, financial markets, corporate finance, and investment analysis. Graduates can work in banks, financial institutions, or insurance companies.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">g) MCom in Marketing</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MCom in Marketing is ideal for students who wish to specialize in marketing strategies, consumer behavior, and advertising. Graduates can pursue careers in brand management, marketing analysis, and digital marketing.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">h) MCom in Human Resource Management</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MCom in Human Resource Management focuses on the management of human capital, including recruitment, training, and employee relations. Graduates can work as HR managers, recruiters, or training coordinators.
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Career Opportunities after MCom</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    After completing an MCom, students can explore a variety of career opportunities in both private and public sectors, such as:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Accountant</li>
+                                    <li>Financial Analyst</li>
+                                    <li>Tax Consultant</li>
+                                    <li>Banker</li>
+                                    <li>Business Manager</li>
+                                    <li>Investment Analyst</li>
+                                    <li>Financial Planner</li>
+                                    <li>Human Resource Manager</li>
+                                    <li>Marketing Manager</li>
+                                </ol>
+                            </section>
+                        
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. Eligibility Criteria</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Minimum Marks in Graduation: Students should have completed a Bachelor's degree in Commerce or a related field with a minimum of 50-60% marks, depending on the course and university.</li>
+                                    <li>Subject Requirements: Some courses may require students to have studied specific subjects during their undergraduate studies, such as Accounting, Business, or Economics.</li>
+                                </ul>
+                            </section>
+                        
+                            <!-- Section 5 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">5. Entrance Exams for MCom Courses</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>DUET (Delhi University Entrance Test): For MCom admissions at Delhi University</li>
+                                    <li>JNU Entrance Exam: For MCom and other courses</li>
+                                    <li>MU OET (Manipal University Online Entrance Test): For MCom admissions at Manipal University</li>
+                                    <li>State University Entrance Exams</li>
+                                    <li>Some private universities conduct their own entrance exams for MCom admissions.</li>
+                                </ul>
+                            </section>
+                        </div>
+                        
+                    </p>
+                </div>
+                <div id="grad-science" class="career-details">
+                    <h4>Master's in Science</h4>
+                    <p>
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">MSc Courses Overview</h1>
+                        </header>
+                        
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    Master of Science (MSc) is a postgraduate degree program designed for students interested in the advanced study of scientific fields. MSc courses offer in-depth knowledge in areas such as Physics, Chemistry, Biology, Mathematics, and specialized subjects like Environmental Science, Computer Science, and Biotechnology. The program equips students with practical skills, research capabilities, and critical thinking to contribute to advancements in science and technology.
+                                </p>
+                            </section>
+                        
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. Popular MSc Courses</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    Students can choose from various specialized MSc courses based on their interests and undergraduate background, including:
+                                </p>
+                        
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) MSc in Physics</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MSc in Physics focuses on the theoretical and experimental aspects of physics. It covers topics like quantum mechanics, classical mechanics, electromagnetism, and thermodynamics. This course prepares students for research, teaching, and roles in scientific institutions or industries requiring advanced knowledge in physics.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">b) MSc in Chemistry</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MSc in Chemistry provides students with advanced knowledge in organic, inorganic, physical, and analytical chemistry. Students learn about chemical reactions, molecular structures, and chemical processes, preparing them for careers in research, pharmaceuticals, and chemical industries.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">c) MSc in Biology</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MSc in Biology covers topics like genetics, microbiology, ecology, and biotechnology. This program prepares students for careers in healthcare, research, and environmental science, with a strong focus on laboratory work and experimental techniques.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">d) MSc in Mathematics</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MSc in Mathematics involves the study of advanced mathematical concepts such as algebra, calculus, statistics, and differential equations. This program is ideal for students interested in careers in academia, research, finance, or data science.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">e) MSc in Computer Science</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MSc in Computer Science focuses on areas like programming, data structures, algorithms, and artificial intelligence. It prepares students for careers in software development, data science, cybersecurity, and IT consulting.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">f) MSc in Environmental Science</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MSc in Environmental Science is focused on the study of environmental issues, sustainability, and conservation. Students learn about ecology, environmental policies, and pollution control. Graduates can pursue careers in environmental consultancy, research, and policy-making.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">g) MSc in Biotechnology</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MSc in Biotechnology explores the application of biological systems and organisms to develop products and processes. Topics include genetic engineering, bioinformatics, and molecular biology. This course is ideal for students seeking careers in research, pharmaceuticals, and agriculture.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">h) MSc in Microbiology</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MSc in Microbiology focuses on the study of microorganisms and their impact on human health, agriculture, and the environment. Students learn about microbial genetics, immunology, and microbiological techniques, leading to careers in healthcare, research, and pharmaceuticals.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">i) MSc in Psychology</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            MSc in Psychology focuses on advanced concepts in human behavior, cognitive processes, and mental health. Students learn about clinical psychology, counseling, and research methods, preparing them for careers in counseling, therapy, and research.
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Career Opportunities after MSc</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    An MSc degree opens the door to various career opportunities in research, development, education, and industry. Some of the potential career paths include:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Research Scientist</li>
+                                    <li>Biochemist</li>
+                                    <li>Data Analyst</li>
+                                    <li>Software Engineer</li>
+                                    <li>Environmental Consultant</li>
+                                    <li>Pharmaceutical Scientist</li>
+                                    <li>Clinical Psychologist</li>
+                                    <li>University Lecturer</li>
+                                    <li>Laboratory Manager</li>
+                                </ol>
+                            </section>
+                        
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. Eligibility Criteria</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Minimum Marks in Graduation: Students must have completed a Bachelor's degree in Science or a related field with a minimum of 50-60% marks, depending on the course and university.</li>
+                                    <li>Subject Requirements: Some MSc courses may require students to have studied specific subjects in their undergraduate studies, such as Physics for MSc in Physics or Computer Science for MSc in Computer Science.</li>
+                                </ul>
+                            </section>
+                        
+                            <!-- Section 5 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">5. Entrance Exams for MSc Courses</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>JAM (Joint Admission Test for M.Sc): For admissions to various MSc programs in IITs and IISc</li>
+                                    <li>DUET (Delhi University Entrance Test): For MSc admissions in Delhi University</li>
+                                    <li>JNU Entrance Exam: For MSc and other courses at JNU</li>
+                                    <li>State University Entrance Exams</li>
+                                    <li>Some private universities conduct their own entrance exams for MSc admissions.</li>
+                                </ul>
+                            </section>
+                        </div>
+                        
+
+                    </p>
+                </div>
+                <div id="grad-competitive" class="career-details">
+                    <h4>Competitive Exams</h4>
+                    <p>
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">Competitive Exams after Graduation</h1>
+                        </header>
+                        
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    Competitive exams after graduation are gateways to prestigious job roles in the public and private sectors or advanced education opportunities. These exams test candidates on various skills such as reasoning, quantitative aptitude, subject knowledge, and general awareness. They are highly sought after for career growth, government jobs, and academic pursuits.
+                                </p>
+                            </section>
+                        
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. Popular Competitive Exams</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    Graduates from various disciplines can choose from numerous competitive exams based on their career aspirations. Some of the most popular competitive exams include:
+                                </p>
+                        
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) Civil Services Examination (UPSC)</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Conducted by the Union Public Service Commission (UPSC), this exam is one of the most prestigious in India. It opens doors to administrative roles such as IAS, IPS, and IFS. The exam consists of three stages: Preliminary, Mains, and Interview.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">b) SSC CGL (Staff Selection Commission Combined Graduate Level)</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            The SSC CGL exam is conducted for recruitment to various Group B and Group C posts in government ministries, departments, and organizations. It tests candidates on reasoning, quantitative aptitude, and general awareness.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">c) Banking Exams (IBPS PO, SBI PO, RBI Grade B)</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Banking exams such as IBPS PO, SBI PO, and RBI Grade B recruit candidates for managerial roles in public sector banks and the Reserve Bank of India. These exams evaluate aptitude, reasoning, and English skills.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">d) GATE (Graduate Aptitude Test in Engineering)</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            GATE is primarily for students seeking postgraduate admissions in engineering and technology. It is also accepted for recruitment by PSUs (Public Sector Undertakings) like ONGC, IOCL, and NTPC.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">e) CAT (Common Admission Test)</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            CAT is a highly competitive exam for admission into prestigious management programs like MBA at IIMs and other top B-schools. It tests quantitative ability, logical reasoning, and verbal ability.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">f) UGC NET (University Grants Commission National Eligibility Test)</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            UGC NET is conducted for eligibility as Assistant Professors or for Junior Research Fellowships (JRF) in universities and colleges. It includes two papers focusing on teaching and research aptitude as well as subject-specific knowledge.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">g) Defence Exams (CDS, AFCAT, NDA)</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Defence-related exams like CDS (Combined Defence Services) and AFCAT (Air Force Common Admission Test) recruit candidates into the Indian Armed Forces. These exams test reasoning, general knowledge, and physical fitness.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">h) State Public Service Commission Exams</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            State PSC exams recruit candidates for administrative and managerial roles within individual states. These exams include general studies, aptitude tests, and state-specific topics.
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Benefits of Competitive Exams</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    Competitive exams after graduation help candidates secure prestigious job roles and ensure career growth. Some of the benefits include:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Opportunity to work in government and public sector organizations.</li>
+                                    <li>Access to high-paying, secure, and reputed jobs.</li>
+                                    <li>Enhancement of skills such as analytical reasoning, problem-solving, and decision-making.</li>
+                                    <li>Recognition and respect in society.</li>
+                                </ol>
+                            </section>
+                        
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. Preparation Tips for Competitive Exams</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Create a study plan and stick to it consistently.</li>
+                                    <li>Understand the exam syllabus and pattern thoroughly.</li>
+                                    <li>Practice mock tests and previous year question papers.</li>
+                                    <li>Focus on time management and accuracy.</li>
+                                    <li>Stay updated with current affairs and general knowledge.</li>
+                                </ul>
+                            </section>
+                        </div>
+                        
+                    </p>
+                </div>
+                <div id="grad-other" class="career-details">
+                    <h4>Other</h4>
+                    <p>
+                        <header style="background-color: #4da5fd; color: #fff; padding: 20px; text-align: center;">
+                            <h1 style="margin: 0;">Other Career Options after Graduation</h1>
+                        </header>
+                        
+                        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+                            <!-- Section 1 -->
+                            <section style="margin-bottom: 30px;">
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333; text-align: left;">
+                                    Graduation opens up a wide array of career opportunities across diverse fields. Beyond the conventional paths, students can explore innovative and dynamic careers that align with their skills and interests. These options range from creative industries to emerging technologies, offering exciting prospects for growth and fulfillment.
+                                </p>
+                            </section>
+                        
+                            <!-- Section 2 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">2. Unique Career Options</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    Graduates can venture into several unconventional yet rewarding career paths, such as:
+                                </p>
+                        
+                                <div style="text-align: left;">
+                                    <h6 style="color: #007BFF;">a) Data Science and Analytics</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Data science is one of the most in-demand careers today. Graduates can pursue roles like Data Analyst, Data Scientist, or Business Analyst. These roles involve analyzing complex datasets to help businesses make informed decisions.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">b) Content Creation and Digital Marketing</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            With the rise of social media and online platforms, content creation and digital marketing have emerged as promising careers. Graduates can work as Social Media Managers, SEO Specialists, Bloggers, or Influencers.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">c) Entrepreneurship and Startups</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            For those with innovative ideas and a passion for business, starting a venture can be a fulfilling career choice. Graduates can explore entrepreneurship through various startup incubators and accelerators.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">d) Ethical Hacking and Cybersecurity</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Cybersecurity experts protect sensitive data from cyber threats. Roles like Ethical Hacker, Cybersecurity Analyst, and Security Consultant are gaining importance in the digital age.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">e) Event Management</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Event management involves planning and executing corporate events, weddings, concerts, and other gatherings. This career suits individuals with strong organizational and communication skills.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">f) Foreign Language Expert</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Proficiency in a foreign language can lead to careers in translation, interpretation, and language training. Industries like tourism, diplomacy, and global business value multilingual professionals.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">g) Film and Media Production</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            The film and media industry offers careers in direction, cinematography, editing, scriptwriting, and production. Graduates can work on movies, TV shows, advertisements, and documentaries.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">h) Environmental Science and Sustainability</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            With growing environmental concerns, careers in sustainability, renewable energy, and conservation are in high demand. Roles include Environmental Scientist, Sustainability Consultant, and Wildlife Conservationist.
+                                        </p>
+                                    </div>
+                        
+                                    <h6 style="color: #007BFF;">i) Sports Management</h6>
+                                    <div style="padding-left: 5%;">
+                                        <p style="font-size: 1.1em; color: #333;">
+                                            Sports management involves managing athletes, sports teams, and events. Graduates with a passion for sports can explore careers as Sports Agents, Event Coordinators, or Marketing Managers in the sports industry.
+                                        </p>
+                                    </div>
+                                </div>
+                            </section>
+                        
+                            <!-- Section 3 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">3. Benefits of Exploring Unconventional Careers</h5>
+                                <p style="line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    Choosing less-traditional career paths can offer unique advantages, such as:
+                                </p>
+                                <ol style="list-style-type: decimal; padding-left: 20px;">
+                                    <li>Opportunities to work in innovative and evolving industries.</li>
+                                    <li>Ability to pursue careers aligned with personal passions and skills.</li>
+                                    <li>Access to global career opportunities in niche fields.</li>
+                                    <li>Potential for entrepreneurship and self-employment.</li>
+                                </ol>
+                            </section>
+                        
+                            <!-- Section 4 -->
+                            <section style="margin-bottom: 30px; text-align: left;">
+                                <h5 style="color: #007BFF;">4. How to Start Your Career</h5>
+                                <ul style="list-style-type: disc; padding-left: 20px; line-height: 1.6; font-size: 1.1em; color: #333;">
+                                    <li>Identify your interests, strengths, and long-term goals.</li>
+                                    <li>Research the requirements and opportunities in your chosen field.</li>
+                                    <li>Gain relevant skills through courses, internships, and certifications.</li>
+                                    <li>Network with professionals and mentors in the industry.</li>
+                                    <li>Stay updated with industry trends and advancements.</li>
+                                </ul>
+                            </section>
+                        </div>
+                        
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer style="background-color: #14273E; color: white; padding: 50px 0; font-family: Arial, sans-serif; position: static; bottom: 0; width: 100%;">
+        <div style="max-width: 1100px; margin: auto; display: flex; justify-content: space-between; flex-wrap: wrap; text-align: left;">
+            
+            <!-- CareerBuddy About Section -->
+            <div style="flex: 1; min-width: 250px; padding: 10px;">
+                <h3 style="background-color: #1d3557; color: #f8c74e; display: inline-block; padding: 10px 20px; border-radius: 10px;">
+                    Career<span style="color: white;">Buddy</span>
+                </h3>
+                <p style="margin-top: 10px; color: #b0c4de;">With detailed resources, expert guidance, and tailored recommendations, we aim to bridge the gap between aspirations and achievements.</p>
+                <div style="margin-top: 15px;">
+                    <a href="#" style="text-decoration: none; margin-right: 10px;"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" style="text-decoration: none; margin-right: 10px;"><i class="fa-brands fa-square-github"></i></a>
+                    <a href="#" style="text-decoration: none; margin-right: 10px;"><i class="fa-brands fa-square-x-twitter"></i></a>
+                    <a href="#" style="text-decoration: none;"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+    
+            <!-- Company Links -->
+            <div style="flex: 1; min-width: 200px; padding: 10px;">
+                <h4>Company</h4>
+                <p><a href="#" style="color: #b0c4de; text-decoration: none;">Security & Privacy</a></p>
+                <p><a href="#" style="color: #b0c4de; text-decoration: none;">Support</a></p>
+                <p><a href="#" style="color: #b0c4de; text-decoration: none;">Terms & Conditions</a></p>
+                <p><a href="#" style="color: #b0c4de; text-decoration: none;">Contact</a></p>
+                <p><a href="#" style="color: #b0c4de; text-decoration: none;">About Us</a></p>
+            </div>
+    
+            <!-- LinkedIn Section -->
+            <div style="flex: 1; min-width: 200px; padding: 10px;">
+                <h4>LinkedIn</h4>
+                <div style="background-color: #224f74; padding: 15px; border-radius: 10px; width: 220px; position: relative;">
+                    <p style="margin: 0; color: white;">The full monty spiffing good time.</p>
+                    <p style="margin: 5px 0; color: #f8c74e;">@CareerBuddy.com</p>
+                    <div style="position: absolute; bottom: -10px; left: 15px; width: 20px; height: 20px; background-color: #224f74; clip-path: polygon(50% 100%, 0 0, 100% 0);"></div>
+                </div>
+            </div>
+    
+            <!-- Newsletter Signup -->
+            <div style="flex: 1; min-width: 200px; padding: 10px;">
+                <h4>Sign Up</h4>
+                <p>Follow us to stay updated.</p>
+                <form style="display: flex;">
+                    <input type="email" placeholder="subscribe" style="padding: 10px; border-radius: 5px; border: none; flex: 1;">
+                    <button type="submit" style="background-color: #2dbf9f; border: none; padding: 10px 15px; color: white; border-radius: 5px; margin-left: 5px;">Go</button>
+                </form>
+            </div>
+    
+        </div>
+        <div style="text-align: center; padding-top: 20px; color: #b0c4de;">© 2025 CareerBuddy.</div>
+    </footer>
+    
+
+
+</body>
+
+</html>
