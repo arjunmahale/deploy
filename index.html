@@ -8,8 +8,22 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    
+
     <style>
+         @media (max-width: 768px) {
+        #contact-us div {
+            flex-direction: column;
+            text-align: center;
+            padding: 20px;
+        }
+        #contact-us div div {
+            padding-right: 0;
+            margin-bottom: 20px;
+        }
+        form input, form textarea {
+            width: 100% !important;
+        }
+    }
 
 @media (max-width: 768px) {
         #about-us div {
@@ -290,20 +304,21 @@
 </section>
 
 <!-- query section -->
-<section style="display: flex; justify-content: center; align-items: center; padding: 50px; background-color: #f8f9fa;"id="contact us">
-    <div style="display: flex; max-width: 1100px; width: 100%; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+<section style="display: flex; justify-content: center; align-items: center; padding: 50px; background-color: #f8f9fa;" id="contact-us">
+    <div style="display: flex; flex-wrap: wrap; max-width: 1100px; width: 100%; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+        
         <!-- Left Section -->
-        <div style="flex: 1; padding-right: 40px;">
+        <div style="flex: 1; min-width: 300px; padding-right: 40px; text-align: left;">
             <h2 style="font-size: 24px; font-weight: bold; color: #1d3557;">Ask a Query</h2>
             <p style="font-size: 16px; color: #4a4a4a;">Looking for help? Fill the form and make a better decision.</p>
             <hr style="margin: 15px 0;">
             <p><strong>Address :</strong><br> <i class="fa-solid fa-house"></i> MG Road, Nashik, Maharashtra, India</p>
-            <p><strong> Phone :</strong><br> <i class="fa-solid fa-phone"></i> 1234567890</p>
+            <p><strong>Phone :</strong><br> <i class="fa-solid fa-phone"></i> 1234567890</p>
             <p><strong>Support :</strong><br><i class="fa-regular fa-envelope"></i> CareerBuddy@gmail.com<br> help@.com</p>
         </div>
 
         <!-- Right Section - Form -->
-        <div style="flex: 1; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); border-left: 4px solid orange;">
+        <div style="flex: 1; min-width: 300px; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); border-left: 4px solid orange;">
             <h3 style="font-size: 20px; font-weight: bold; color: #1d3557;">Enter your Query</h3>
             <p style="color: #4a4a4a;">Expert guidance, and tailored recommendations, we aim to bridge the gap between aspirations and achievements.</p>
             <form>
@@ -314,6 +329,7 @@
                 <button type="submit" style="width: 100%; padding: 12px; background-color: #2db58b; color: white; border: none; border-radius: 5px; font-size: 16px; cursor: pointer;">Send Message</button>
             </form>
         </div>
+
     </div>
 </section>
 <!-- footer section -->
