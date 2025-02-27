@@ -214,7 +214,49 @@
                         <a href="https://twitter.com" class="twitter" target="_blank"><i class="fab fa-twitter"></i></a>
                         <a href="https://instagram.com" class="instagram" target="_blank"><i class="fab fa-instagram"></i></a>
                     </div>
-                    <a href="careers.html" class="btn-custom">Find My Career</a>
+                    <a href="careers.html" class="btn-custom" id="rotating-button"
+                    style="background-color: #ff9800; color: white; padding: 12px 24px; font-size: 18px; font-weight: bold; text-decoration: none; border-radius: 8px; box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3); transition: all 0.3s ease-in-out; display: inline-block; border: 3px solid transparent; position: relative; overflow: hidden; text-align: center;">
+                    <span id="button-text" style="display: inline-block;">Find My Career</span>
+                 </a>
+                 
+                 <script>
+                    let button = document.getElementById("rotating-button");
+                    let text = document.getElementById("button-text");
+                    let angle = 0;
+                    let scale = 1;
+                    let growing = true;
+                    let colorIndex = 0;
+                    let colors = ["#ff0000", "#00ff00", "#ff1493", "#00ffff", "#ffff00"]; // Color list
+                 
+                    function animateEffects() {
+                       // Rotate border
+                       angle += 5;
+                 
+                       // Reset and change color after each full rotation
+                       if (angle >= 360) {
+                          angle = 0;
+                          colorIndex = (colorIndex + 1) % colors.length; // Cycle through colors
+                       }
+                 
+                       button.style.borderImage = `conic-gradient(${colors[colorIndex]} ${angle}deg, transparent ${angle + 30}deg) 1`;
+                 
+                       // Smooth Zoom In & Out text effect
+                       if (growing) {
+                          scale += 0.005;
+                          if (scale >= 1.15) growing = false;
+                       } else {
+                          scale -= 0.005;
+                          if (scale <= 1) growing = true;
+                       }
+                       text.style.transform = `scale(${scale})`;
+                 
+                       requestAnimationFrame(animateEffects);
+                    }
+                 
+                    animateEffects();
+                 </script>
+                 
+                 
                 </div>
                 <div class="col-md-6">
                     <img src="images/homestud.gif" alt="Students" class="hero-image"style="border-radius:25%;">
